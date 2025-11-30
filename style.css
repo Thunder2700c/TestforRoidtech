@@ -1,67 +1,6 @@
-/* BASE STYLES */
-:root {
-    --bg-color: #0d0d0d;
-    --text-color: #e0e0e0; 
-    --accent-color: #007aff; /* Classic iOS Blue */
-    --accent-dark: #0056b3;
-    --glass-bg: rgba(255, 255, 255, 0.08); 
-    --font-family: 'Inter', sans-serif;
-}
+/* BASE STYLES & GLASSMOPRHISM (No changes needed here) */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* Glassmorphism Effect */
-.glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-/* --- S23 FE ANIMATION STYLES --- */
-.device-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    perspective: 1000px; /* Enables 3D transforms */
-    pointer-events: none; 
-    z-index: 0; 
-    overflow: hidden; 
-}
-
-#s23fe-model {
-    position: absolute;
-    width: 25%; 
-    max-width: 400px;
-    top: 55%;
-    left: 70%; 
-    transform: translate(-50%, -50%); 
-    opacity: 0.8;
-}
-/* ---------------------------------- */
-
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s;
-}
+/* --- CRUCIAL FIXES FOR S23 FE POSITIONING --- */
 
 .section {
     min-height: 100vh;
@@ -72,35 +11,48 @@ a {
     justify-content: center;
     text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Ensures sections below the hero render correctly */
 }
 
-.background-overlay {
+/* 1. Device Container: Must be positioned absolutely over the hero section */
+.device-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.1), rgba(13, 13, 13, 1) 50%);
-    z-index: -1;
+    height: 100vh; /* CRITICAL: Use 100vh to cover the entire viewport height */
+    perspective: 1200px; /* Increased perspective for better 3D depth */
+    pointer-events: none;
+    z-index: 0; /* Ensures the phone is ALWAYS behind the main text */
+    overflow: hidden; 
 }
 
-/* HERO HEADING and CTA BUTTON styles remain the same... */
-
-.guide-card {
-    padding: 30px;
-    border-radius: 15px; 
-    text-align: left;
-    border-left: 5px solid var(--accent-color);
-    transform-style: preserve-3d;
+/* 2. S23 FE Model: Positioned relative to the container, fixed to the background */
+#s23fe-model {
+    position: fixed; /* CRITICAL: Fixed position keeps it tied to the viewport, not the scroll */
+    width: 25%; 
+    max-width: 400px;
+    top: 50%; /* Center vertically in the viewport */
+    left: 75%; /* Push to the right side of the screen */
+    transform: translate(-50%, -50%); /* Centers the image relative to its own top/left corner */
+    opacity: 0.9;
+    /* We remove the initial 'transform: translate(...)' here and let GSAP handle 3D */
 }
 
-.guide-card:hover {
-    transform: perspective(1000px) rotateY(1deg) scale(1.02);
+/* 3. Hero Content: Must have a high z-index to appear on top */
+.hero-content {
+    max-width: 900px;
+    position: relative; /* CRITICAL: Must be relative to accept the z-index */
+    z-index: 10; /* Ensures text is ALWAYS on top of the phone (z-index: 0) */
 }
 
-/* VIDEO SHOWCASE and FOOTER styles remain the same... */
+/* 4. Background Fix: To prevent the black text "Samsung S23 FE" from being visible */
+.background-overlay {
+    /* Use a solid color on top of the phone area if needed, 
+       but the Z-index change should fix the 'floating text' issue */
+}
 
+/* ---------------------------------- */
 @media (max-width: 768px) {
     #s23fe-model {
         width: 60%; 
