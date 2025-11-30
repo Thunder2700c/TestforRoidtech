@@ -4,19 +4,19 @@ const featuredVideos = [
     {
         // Video based on user's theme request
         title: "How to Get iOS 26 Style Transparent Dock on Android | Samsung",
-        embedId: "YOUTUBE_EMBED_ID_1", // <<< INSERT ACTUAL YOUTUBE ID HERE
+        embedId: "https://youtu.be/4NU7svzDAC4?si=ifuC49odCw0x5X0X", // <<< INSERT ACTUAL YOUTUBE ID HERE
         description: "Replicating the new iOS look on One UI—transparent dock, widgets, and more."
     },
     {
         // Video based on RoidTech's channel content
         title: "One UI 8.5 vs One UI 8.0: Call Screen & Animations Comparison",
-        embedId: "YOUTUBE_EMBED_ID_2", // <<< INSERT ACTUAL YOUTUBE ID HERE
+        embedId: "https://youtu.be/JRAHwreGlA0?si=CeqGwwBGyQBTVNE-", // <<< INSERT ACTUAL YOUTUBE ID HERE
         description: "A side-by-side look at the new animation speed and call screen interface in the latest beta."
     },
     {
         // Video based on RoidTech's channel content
         title: "Samsung Official AppLock App is Here (One UI 8.5 Feature)",
-        embedId: "YOUTUBE_EMBED_ID_3", // <<< INSERT ACTUAL YOUTUBE ID HERE
+        embedId: "https://youtu.be/-co1VuiDGCE?si=CN1TP67oTRY962QM", // <<< INSERT ACTUAL YOUTUBE ID HERE
         description: "Finally, a native app lock. How to enable it and its impact on performance."
     },
 ];
