@@ -226,11 +226,13 @@ body {
     opacity: 0.6;
 }
 
-/* --- CTA BUTTON STYLES (FIXED) --- */
+/* --- CTA BUTTON STYLES (FIXED TEXT COLOR) --- */
 
 .cta-button {
-    background-color: var(--accent-color);
-    color: var(--bg-color); /* Ensures dark text on light button background */
+    /* CRITICAL FIX: Ensure background is set and text color is contrasting (dark) */
+    background-color: var(--accent-color); /* This is the bright blue (#007aff) */
+    color: var(--bg-color); /* CRITICAL: This is the dark black text (#0d0d0d) */
+    
     padding: 12px 30px;
     border-radius: 50px;
     font-weight: 700;
@@ -238,6 +240,7 @@ body {
     letter-spacing: 0.5px;
     transition: background-color 0.3s, transform 0.2s;
     display: inline-block;
+    text-decoration: none; /* Make sure the link underline is removed if it's there */
 }
 
 .cta-button:hover {
@@ -251,7 +254,6 @@ body {
     background-color: var(--accent-color);
     color: var(--bg-color); 
 }
-
 
 /* --- FOOTER & SOCIAL LINKS FIX --- */
 footer {
