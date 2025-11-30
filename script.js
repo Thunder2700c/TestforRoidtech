@@ -36,20 +36,27 @@ document.querySelectorAll('.anim-card, .section-title').forEach(el => {
   });
 });
 
-// 3D Phone – Epic scroll magic
+// 3D Phone – Epic scroll magic (Updated for model-viewer)
 gsap.to("#s23fe-model", {
-  yPercent: -200,
-  xPercent: 100,
-  rotationY: 720,
-  rotationX: 120,
-  scale: 0.4,
-  opacity: 0,
+  // Animating the model-viewer properties:
+  // camera-orbit format is: "theta phi radius"
+  "camera-orbit": "360deg 90deg 2.5m", // Rotates the view 360 degrees and moves slightly further away
+  "field-of-view": "50deg",             // Changes the zoom (shrinks the apparent size)
+  opacity: 0,                           // Fades out the model container
   ease: "none",
-  scrollTrigger: { trigger: "#hero", start: "top top", end: "+=180%", scrub: 1.2 }
+  scrollTrigger: { 
+    trigger: "#hero", 
+    start: "top top", 
+    end: "bottom top", // Ends when the hero section leaves the viewport
+    scrub: 1.2 
+  }
 });
 
-// Gentle idle float
+// Gentle idle float (Updated for model-viewer)
 gsap.to("#s23fe-model", {
-  y: "+=20", rotationY: "+=15", rotationX: "-=10",
-  duration: 14, repeat: -1, yoyo: true, ease: "sine.inOut"
+  "camera-orbit": "+=10deg -=5deg", // Subtly moves the camera for a gentle float
+  duration: 14, 
+  repeat: -1, 
+  yoyo: true, 
+  ease: "sine.inOut"
 });
