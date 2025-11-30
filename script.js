@@ -9,8 +9,8 @@ const featuredVideos = [
     },
     {
         // YOU MUST REPLACE THIS PLACEHOLDER ID:
-        title: "One UI 8.5 vs One UI 8.0: Call Screen & Animations Comparison",
-        embedId: "YOUR_SECOND_VIDEO_ID", 
+        title: "Samsung S23/23fe S23 Ultra November Update Review",
+        embedId: "JRAHwreGlA0", 
         description: "A side-by-side look at the new animation speed and call screen interface in the latest beta."
     },
     {
