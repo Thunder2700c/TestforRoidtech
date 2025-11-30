@@ -1,4 +1,36 @@
-/* BASE STYLES & GLASSMOPRHISM (No changes needed here) */
+/* BASE STYLES */
+:root {
+    --bg-color: #0d0d0d;
+    --text-color: #e0e0e0; 
+    --accent-color: #007aff; /* Classic iOS Blue */
+    --accent-dark: #0056b3;
+    --glass-bg: rgba(255, 255, 255, 0.08); 
+    --font-family: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
 /* --- CRUCIAL FIXES FOR S23 FE POSITIONING --- */
 
@@ -36,23 +68,35 @@
     left: 75%; /* Push to the right side of the screen */
     transform: translate(-50%, -50%); /* Centers the image relative to its own top/left corner */
     opacity: 0.9;
-    /* We remove the initial 'transform: translate(...)' here and let GSAP handle 3D */
 }
 
 /* 3. Hero Content: Must have a high z-index to appear on top */
 .hero-content {
     max-width: 900px;
-    position: relative; /* CRITICAL: Must be relative to accept the z-index */
-    z-index: 10; /* Ensures text is ALWAYS on top of the phone (z-index: 0) */
+    position: relative; 
+    z-index: 10; /* Ensures text is ALWAYS on top of the phone */
 }
-
-/* 4. Background Fix: To prevent the black text "Samsung S23 FE" from being visible */
-.background-overlay {
-    /* Use a solid color on top of the phone area if needed, 
-       but the Z-index change should fix the 'floating text' issue */
-}
-
 /* ---------------------------------- */
+
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.1), rgba(13, 13, 13, 1) 50%);
+    z-index: -1;
+}
+
+/* Remaining styles for typography, CTA buttons, and grids are the same... */
+
 @media (max-width: 768px) {
     #s23fe-model {
         width: 60%; 
