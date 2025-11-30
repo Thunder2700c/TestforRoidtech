@@ -35,51 +35,57 @@
     <footer class="glass-effect">
         <p>© 2025 RoidTech Hub • Built by a fan</p>
         <div class="social-links">
-            <a href="https://www.youtube.com/watch?v=eN7VawUXD-04" target="_blank">YouTube</a>
+            <a href="https://www.youtube.com/watch?v=eN7VawUXD-05" target="_blank">YouTube</a>
             <a href="https://instagram.com/roid.tech" target="_blank">Instagram</a>
         </div>
     </footer>
     
     <script src="config.js"></script>
+    
     <script>
         function renderDownloads() {
             const container = document.getElementById('download-content');
             let html = '';
 
-            // Render Good Lock Modules
-            html += `
-                <div class="download-category glass-effect">
-                    <h2>Essential Good Lock Modules</h2>
-                    <ul class="download-list">
-                        ${downloadLinks.goodLockModules.map(item => `
-                            <li>
-                                <span>${item.name}</span>
-                                <a href="${item.url}" target="_blank" class="download-link">Download</a>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `;
+            // This object maps the internal code name (key) to the display title (value)
+            const categoryTitles = {
+                goodLockModules: "Essential Good Lock Modules",
+                systemApps: "Official One UI System Apps",
+                otherEssentialApps: "Other Essential Apps & Tools",
+                archiveLinks: "Archive & Older Links"
+                // Add new category titles here (key must match the array name in config.js)
+            };
 
-            // Render System Apps
-            html += `
-                <div class="download-category glass-effect">
-                    <h2>Official One UI System Apps</h2>
-                    <ul class="download-list">
-                        ${downloadLinks.systemApps.map(item => `
-                            <li>
-                                <span>${item.name}</span>
-                                <a href="${item.url}" target="_blank" class="download-link">Download</a>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `;
+            // Helper function to generate the list items HTML
+            const generateList = (list) => list.map(item => `
+                <li>
+                    <span>${item.name}</span>
+                    <a href="${item.url}" target="_blank" class="download-link">Download</a>
+                </li>
+            `).join('');
+            
+            // Loop through all categories defined in the downloadLinks object
+            for (const key in downloadLinks) {
+                if (downloadLinks.hasOwnProperty(key)) {
+                    const categoryData = downloadLinks[key];
+                    // Gets the friendly title, or defaults if not found
+                    const categoryTitle = categoryTitles[key] || "Download Category"; 
+
+                    html += `
+                        <div class="download-category glass-effect">
+                            <h2>${categoryTitle}</h2>
+                            <ul class="download-list">
+                                ${generateList(categoryData)}
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
 
             container.innerHTML = html;
         }
 
-        // Run the render function only if the necessary data exists
+        // Execute the rendering function when the page loads
         if (typeof downloadLinks !== 'undefined') {
             renderDownloads();
         }
