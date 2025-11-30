@@ -1,9 +1,10 @@
 /* BASE STYLES */
 :root {
-    --bg-color: #1a1a2e; /* Dark Blue/Violet */
-    --text-color: #f0f0f0; /* Light Gray */
-    --accent-color: #00bcd4; /* Cyan/Teal (Techy Accent) */
-    --accent-dark: #008ba3;
+    --bg-color: #0d0d0d; /* Deep Black/Gray */
+    --text-color: #e0e0e0; /* Light Gray */
+    --accent-color: #007aff; /* Classic iOS Blue */
+    --accent-dark: #0056b3;
+    --glass-bg: rgba(255, 255, 255, 0.08); /* Transparent White for Glass */
     --font-family: 'Inter', sans-serif;
 }
 
@@ -18,7 +19,23 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    overflow-x: hidden; /* Crucial for clean GSAP animations */
+    overflow-x: hidden;
+    /* Optional: If you want a subtle grain effect on the body for texture */
+    /* background-image: url('data:image/png;base64,...'); */ 
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.glass-effect:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
 a {
@@ -28,7 +45,7 @@ a {
 }
 
 a:hover {
-    color: var(--text-color);
+    color: var(--accent-dark);
 }
 
 .section {
@@ -39,7 +56,21 @@ a:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
+
+/* Optional: Subtle Overlay for Hero */
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.1), rgba(13, 13, 13, 1) 50%);
+    z-index: -1;
+}
+
 
 /* TYPOGRAPHY */
 .section-title {
@@ -47,7 +78,7 @@ a:hover {
     font-weight: 900;
     margin-bottom: 60px;
     letter-spacing: 2px;
-    color: var(--accent-color);
+    color: var(--text-color);
 }
 
 /* HERO SECTION */
@@ -58,10 +89,11 @@ a:hover {
 
 .hero-content {
     max-width: 900px;
+    position: relative;
 }
 
 .hero-heading {
-    font-size: 5vw; /* Responsive font size */
+    font-size: 5vw;
     line-height: 1.1;
     margin-bottom: 30px;
     font-weight: 900;
@@ -69,7 +101,7 @@ a:hover {
 
 .hero-heading span {
     display: block;
-    overflow: hidden; /* For line-by-line GSAP animation */
+    overflow: hidden;
 }
 
 .hero-heading .line-1 { color: #fff; }
@@ -87,23 +119,24 @@ a:hover {
     display: inline-block;
     padding: 15px 35px;
     background-color: var(--accent-color);
-    color: var(--bg-color);
+    color: #fff;
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: 10px; /* Softer radius */
     transition: background-color 0.3s, transform 0.2s;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .cta-button:hover {
-    background-color: #fff;
-    transform: translateY(-2px);
-    color: var(--bg-color); /* Maintain dark text on light hover */
+    background-color: var(--accent-dark);
+    transform: translateY(-3px); /* Deeper lift on hover */
+    color: #fff; 
 }
 
 .cta-button.small {
     padding: 10px 25px;
     margin-top: 30px;
+    border-radius: 8px;
 }
 
 /* GUIDE GRID SECTION */
@@ -116,12 +149,15 @@ a:hover {
 }
 
 .guide-card {
-    background-color: #2c2c47; /* Slightly lighter background */
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 15px; /* Rounded corners for glass effect */
     text-align: left;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-left: 5px solid var(--accent-color);
+    transform-style: preserve-3d; /* For subtle 3D hover effect */
+}
+
+.guide-card:hover {
+    transform: perspective(1000px) rotateY(1deg) scale(1.02);
 }
 
 .guide-card h3 {
@@ -130,13 +166,9 @@ a:hover {
     font-size: 1.5em;
 }
 
-.guide-card p {
-    margin-bottom: 15px;
-}
-
 /* VIDEO SHOWCASE SECTION */
 #video-showcase {
-    min-height: auto; /* Allow content to dictate height */
+    min-height: auto;
 }
 
 .video-grid {
@@ -148,17 +180,15 @@ a:hover {
 }
 
 .video-item {
-    background-color: #2c2c47;
-    border-radius: 8px;
+    border-radius: 15px; /* Rounded corners */
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     text-align: left;
 }
 
 .video-embed {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%; 
     height: 0;
 }
 
@@ -173,6 +203,8 @@ a:hover {
 
 .video-info {
     padding: 15px;
+    /* Apply glass effect to info area for a layered look */
+    background: rgba(255, 255, 255, 0.05); 
 }
 
 .video-info h4 {
@@ -181,19 +213,16 @@ a:hover {
     color: #fff;
 }
 
-.video-info p {
-    font-size: 0.9em;
-    color: #aaa;
-}
-
 /* FOOTER */
 footer {
     padding: 40px 5%;
-    background-color: #111;
+    /* Footer now uses glass effect */
+    border-radius: 0; /* Keep corners sharp if you want it full width */
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .social-links a {
@@ -207,29 +236,17 @@ footer {
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-    .section {
-        min-height: auto;
-        padding: 60px 5%;
-    }
-    
     .hero-heading {
         font-size: 10vw;
     }
-    
     .guide-grid {
         grid-template-columns: 1fr;
     }
-    
     footer {
         flex-direction: column;
         text-align: center;
     }
-    
     .social-links {
         margin-top: 15px;
-    }
-
-    .social-links a {
-        margin: 0 10px;
     }
 }
