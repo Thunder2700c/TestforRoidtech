@@ -16,7 +16,7 @@ const featuredVideos = [
     {
         // YOU MUST REPLACE THIS PLACEHOLDER ID:
         title: "Samsung Official AppLock App is Here (One UI 8.5 Feature)",
-        embedId: "YOUR_THIRD_VIDEO_ID", 
+        embedId: "F01QJDYIN-c", 
         description: "Finally, a native app lock. How to enable it and its impact on performance."
     },
 ];
